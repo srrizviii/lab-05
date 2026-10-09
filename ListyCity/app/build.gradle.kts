@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -40,6 +41,13 @@ android {
 }
 
 dependencies {
+    // Firebase BoM (manages library versions)
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+
+    // Add Cloud Firestore
+    implementation("com.google.firebase:firebase-firestore")
+
+    // Compose & AndroidX dependencies
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -48,6 +56,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
